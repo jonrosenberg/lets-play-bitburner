@@ -25,6 +25,7 @@ export default class BasePlayer {
      *  @returns {import(".").Player}
      */
     get data() { return this.ns.getPlayer(); }
+    get resetInfo() { return this.ns.getResetInfo()}
     get updated_at() { return new Date().valueOf() }
     get hp() { return {
         current: this.data.hp,
@@ -189,8 +190,8 @@ export default class BasePlayer {
     }}
     get playtime() {return {
         total: this.data.totalPlaytime,
-        sinceAug: this.data.playtimeSinceLastAug,
-        sinceBitnode: this.data.playtimeSinceLastBitnode
+        sinceAug: this.resetInfo.lastAugReset,
+        sinceBitnode: this.resetInfo.lastNodeReset
     }}
 
     get ports() { return this.ns.ls("home").filter(file => [
